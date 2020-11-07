@@ -36,27 +36,6 @@ def tours(id):
                             )
 
 
-@app.route('/data/')
-def data_():
-    article = 'все туры:'
-    return render_template('data.html', article=article, tours=data.tours, )
-
-
-@app.route('/data/departures/<departure>')
-def data_dep(departure):
-    article = 'Туры по направлению ' + data.departures[departure] + ':'
-    filtered_tours = {}
-    for tour in data.tours:
-        if departure in data.tours[tour].values():
-            filtered_tours[tour] = data.tours[tour]
-    return render_template('data.html', article=article, tours=filtered_tours)
-
-
-@app.route('/data/tours/<id>')
-def data_id(id):
-    return render_template('data_tour.html', tour=data.tours[int(id)])
-
-
 @app.errorhandler(500)
 def render_server_error(error):
     return "Что-то не так, но мы все починим", 500
